@@ -189,6 +189,13 @@ public class DepartmentUi
             return;
         }
 
+        var existingDepartment = _departmentService.GetAll().FirstOrDefault(d => d.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && d.CompanyId == companyObj.Id);
+        if (existingDepartment != null)
+        {
+            Console.WriteLine("A department with this name already exists for this company. Please choose a different name.");
+            return;
+        }
+
         _departmentService.Add(new Deparment { Name = name, CompanyId = companyObj.Id });
     }
 }

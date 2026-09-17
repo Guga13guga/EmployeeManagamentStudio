@@ -148,6 +148,12 @@ public class CompanyUI
         var city = Console.ReadLine(); 
         Console.WriteLine("Enter company country:");
         var country = Console.ReadLine();
+        var existingCompany = _company.GetAll().FirstOrDefault(c => c.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        if (existingCompany != null)
+        {
+            Console.WriteLine("A company with this name already exists. Please choose a different name.");
+            return;
+        }
         _company.Add(new Company
         {
             Name = name,
