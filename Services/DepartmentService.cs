@@ -48,6 +48,18 @@ public class DepartmentService : GenericService<Deparment>
         }
     }
 
+    public void DeleteDepartmentsByCompanyId(int companyId)
+    {
+        var departmentsToDelete = _items.Where(d => d.CompanyId == companyId).ToList();
+        foreach (var department in departmentsToDelete)
+        {
+            _items.Remove(department);
+        }
+        SaveChanges();
+    }
+
+
+
     public void UpdateDepartment(Deparment updatedDepartment)
     {
         var department = _items.FirstOrDefault(d => d.Id == updatedDepartment.Id);

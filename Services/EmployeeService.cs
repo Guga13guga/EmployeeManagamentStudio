@@ -30,6 +30,16 @@ public class EmployeeService : GenericService<Employee>
         }
     }
 
+    public void DeleteEmployeesByDepartmentId(int departmentId)
+    {
+        var employeesToDelete = _items.Where(e => e.DepartmentId == departmentId).ToList();
+        foreach (var employee in employeesToDelete)
+        {
+            _items.Remove(employee);
+        }
+        SaveChanges();
+    }
+
     public void UpdateEmployee(Employee updatedEmployee)
     {
         var employee = _items.FirstOrDefault(e => e.Id == updatedEmployee.Id);
