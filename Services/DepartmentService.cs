@@ -2,6 +2,9 @@
 
 namespace EmployeeManagamentStudio.Services;
 
+/// <summary>
+/// Service class for managing departments, providing methods to retrieve, filter, sort, update, and delete department data.
+/// </summary>
 public class DepartmentService : GenericService<Deparment>
 {
     public DepartmentService(string filePath) : base(filePath)
@@ -9,12 +12,12 @@ public class DepartmentService : GenericService<Deparment>
 
     }
 
-    public List<Deparment> GetDepartmentsByCompanyId(int companyId)
+    public List<Deparment> GetDepartmentsByCompanyId(Guid companyId)
     {
         return _items.Where(d => d.CompanyId == companyId).ToList();
     }
 
-    public List<Employee> GetEmployeeByDepartment(int departmentId)
+    public List<Employee> GetEmployeeByDepartment(Guid departmentId)
     {
         var department = _items.FirstOrDefault(d => d.Id == departmentId);
         return department?.Employees ?? new List<Employee>();
@@ -38,7 +41,7 @@ public class DepartmentService : GenericService<Deparment>
         return deparments.ToList();
     }
 
-    public void DeleteDepartment(int departmentId)
+    public void DeleteDepartment(Guid departmentId)
     {
         var department = _items.FirstOrDefault(d => d.Id == departmentId);
         if (department != null)
@@ -48,7 +51,7 @@ public class DepartmentService : GenericService<Deparment>
         }
     }
 
-    public void DeleteDepartmentsByCompanyId(int companyId)
+    public void DeleteDepartmentsByCompanyId(Guid companyId)
     {
         var departmentsToDelete = _items.Where(d => d.CompanyId == companyId).ToList();
         foreach (var department in departmentsToDelete)

@@ -1,5 +1,8 @@
 ﻿namespace EmployeeManagamentStudio.Models;
 
+/// <summary>
+/// Represents a company with its details and associated departments.
+/// </summary>
 public class Company : BaseModel
 {
     public required string Name { get; set; }

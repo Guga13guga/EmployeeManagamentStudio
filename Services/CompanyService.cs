@@ -2,6 +2,9 @@
 
 namespace EmployeeManagamentStudio.Services;
 
+/// <summary>
+///Service class for managing Company entities, providing methods for sorting, filtering, deleting, and updating companies.
+/// </summary>
 public class CompanyService : GenericService<Company>
 {
     public CompanyService(string filePath) : base(filePath)
@@ -20,7 +23,7 @@ public class CompanyService : GenericService<Company>
         return companies.ToList();
     }
 
-    public void DeleteCompany(int companyId)
+    public void DeleteCompany(Guid companyId)
     {
         var company = _items.FirstOrDefault(c => c.Id == companyId);
         if (company != null)

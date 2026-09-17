@@ -4,6 +4,9 @@ using EmployeeManagamentStudio.Services;
 
 namespace EmployeeManagamentStudio.UI;
 
+/// <summary>
+/// Represents the user interface for managing departments, allowing users to add, list, update, and delete departments, as well as view employees within a department.
+/// </summary>
 public class DepartmentUi
 {
     private readonly DepartmentService _departmentService;
@@ -68,7 +71,7 @@ public class DepartmentUi
         ListDepartments();
         Console.WriteLine("enter department id:");
         var input = Console.ReadLine();
-        var departmentId = int.TryParse(input, out var id) ? id : -1;
+        var departmentId = Guid.TryParse(input, out var id) ? id : Guid.Empty;
         var department = _departmentService.GetAll().FirstOrDefault(d => d.Id == departmentId);
         if (department is null)
         {
@@ -94,7 +97,7 @@ public class DepartmentUi
         ListDepartments();
         Console.WriteLine("enter department id:");
         var input = Console.ReadLine();
-        var departmentId = int.TryParse(input, out var id) ? id : -1;
+        var departmentId = Guid.TryParse(input, out var id) ? id : Guid.Empty;
         var department = _departmentService.GetAll().FirstOrDefault(d => d.Id == departmentId);
         if (department is null)
         {
@@ -111,7 +114,7 @@ public class DepartmentUi
         ListDepartments();
         Console.WriteLine("enter department id:");
         var input = Console.ReadLine();
-        var departmentId = int.TryParse(input, out var id) ? id : -1;
+        var departmentId = Guid.TryParse(input, out var id) ? id : Guid.Empty;
         var department = _departmentService.GetAll().FirstOrDefault(d => d.Id == departmentId);
         if (department is null)
         {

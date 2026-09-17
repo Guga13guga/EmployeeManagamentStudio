@@ -2,6 +2,10 @@
 
 namespace EmployeeManagamentStudio.Services;
 
+/// <summary>
+/// Generic service class for managing a collection of items of type T, providing methods for adding, removing, retrieving, and saving items to a file.
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class GenericService<T> where T : class
 {
     protected readonly List<T> _items;

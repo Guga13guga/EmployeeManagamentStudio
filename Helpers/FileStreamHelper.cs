@@ -2,6 +2,14 @@
 
 public static class FileStreamHelper
 {
+
+    /// <summary>
+    /// Writes the specified content to a file at the given file path. If the file does not exist, it will be created. The content is serialized to JSON format before writing.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="filePath"></param>
+    /// <param name="content"></param>
+    /// <exception cref="IOException"></exception>
     public static void WriteContentToFile<T>(string filePath, T content)
     {
         try
@@ -21,14 +29,22 @@ public static class FileStreamHelper
         }
     }
 
-    public static T ReadContentFromFile<T>(string filePath)
+    /// <summary>
+    /// Reads the content from a file at the specified file path and deserializes it into an object of type T. If the file does not exist, a new instance of T is returned. The content is expected to be in JSON format.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="filePath"></param>
+    /// <returns></returns>
+    /// <exception cref="IOException"></exception>
+    public static T ReadContentFromFile<T>(string filePath) where T : new()
     {
         try
         {
             if (!File.Exists(filePath))
             {
-                throw new FileNotFoundException($"The file at path {filePath} does not exist.");
+                return new T();
             }
+
             using var reader = new StreamReader(filePath);
             var content = reader.ReadToEnd();
             return System.Text.Json.JsonSerializer.Deserialize<T>(content);

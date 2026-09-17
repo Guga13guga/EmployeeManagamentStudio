@@ -4,6 +4,9 @@ using EmployeeManagamentStudio.Services;
 
 namespace EmployeeManagamentStudio.UI;
 
+/// <summary>
+/// Represents the user interface for managing companies, allowing users to add, list, update, and delete companies.
+/// </summary>
 public class CompanyUI
 {
     private readonly CompanyService _company;
@@ -28,6 +31,7 @@ public class CompanyUI
             Console.WriteLine("4. Delete Company");
             Console.WriteLine("5. Exit");
             Console.Write("Select an option: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             var input = Console.ReadLine();
             switch (input)
             {
@@ -75,14 +79,14 @@ public class CompanyUI
             return;
         }
 
-        var allDepartments = _deparments.GetAll().Where(d => d.CompanyId == int.Parse(id)).ToList();
+        var allDepartments = _deparments.GetAll().Where(d => d.CompanyId == Guid.Parse(id)).ToList();
         foreach (var department in allDepartments)
         {
             _employeeService.DeleteEmployeesByDepartmentId(department.Id);
         }
 
-        _deparments.DeleteDepartmentsByCompanyId(int.Parse(id));
-        _company.DeleteCompany(int.Parse(id));
+        _deparments.DeleteDepartmentsByCompanyId(Guid.Parse(id));
+        _company.DeleteCompany(Guid.Parse(id));
     }
 
     private void UpdateCompany()
@@ -112,7 +116,7 @@ public class CompanyUI
         var country = Console.ReadLine();
         _company.UpdateCompany(new Company
         {
-            Id = int.Parse(id),
+            Id = Guid.Parse(id),
             Name = name,
             Phone = phone,
             Address = address,

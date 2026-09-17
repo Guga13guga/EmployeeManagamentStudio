@@ -1,5 +1,8 @@
 ﻿namespace EmployeeManagamentStudio.Models;
 
+/// <summary>
+/// Represents an employee within the organization, including their personal details and associated department.
+/// </summary>
 public class Employee : BaseModel
 {
     public required string FirstName { get; set; }
@@ -16,5 +19,5 @@ public class Employee : BaseModel
 
     public string? Fax { get; set; }
 
-    public int DepartmentId { get; set; }
+    public Guid DepartmentId { get; set; }
 }
