@@ -1,7 +1,7 @@
 ﻿using EmployeeManagamentStudio.UI;
 
 /// <summary>
-/// Main entry point of the application. It provides a console-based user interface for managing employees, departments, and companies.
+/// Main entry point of the application. It provides a console-based user interface for managing employees, departments and companies.
 /// </summary>
 
 var employeeUi = new EmployeeUI();
