@@ -1,11 +1,17 @@
 ﻿namespace EmployeeManagamentStudio.Consts;
 
 /// <summary>
-/// Contains constant file paths used for storing data related to companies, departments, and employees.
+/// Contains file paths used for storing data related to companies, departments, and employees.
 /// </summary>
 public static class FilePaths
 {
-    public const string CompaniesStoragePath = "C:\\Users\\aapkh\\OneDrive\\Desktop\\STMS\\companies.json";
-    public const string DepartmentsStoragePath = "C:\\Users\\aapkh\\OneDrive\\Desktop\\STMS\\departments.json";
-    public const string EmployeesStoragePath = "C:\\Users\\aapkh\\OneDrive\\Desktop\\STMS\\employees.json";
+    private static string GetDataPath(string fileName)
+    {
+        var dataDirectory = Path.Combine(AppContext.BaseDirectory, "Data");
+        return Path.Combine(dataDirectory, fileName);
+    }
+
+    public static string CompaniesStoragePath => GetDataPath("companies.json");
+    public static string DepartmentsStoragePath => GetDataPath("departments.json");
+    public static string EmployeesStoragePath => GetDataPath("employees.json");
 }

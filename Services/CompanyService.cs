@@ -3,7 +3,7 @@
 namespace EmployeeManagamentStudio.Services;
 
 /// <summary>
-///Service class for managing Company entities, providing methods for sorting, filtering, deleting, and updating companies.
+/// Service class for managing Company entities, providing methods for sorting, filtering, deleting, and updating companies.
 /// </summary>
 public class CompanyService : GenericService<Company>
 {
@@ -13,14 +13,12 @@ public class CompanyService : GenericService<Company>
 
     public List<Company> SortCompaniesByName()
     {
-        var companies = _items.OrderBy(i => i.Name);
-        return companies.ToList();
+        return _items.OrderBy(i => i.Name).ToList();
     }
 
     public List<Company> FillterCompanyByName(string name)
     {
-        var companies = _items.Where(i => i.Name.Contains(name, StringComparison.OrdinalIgnoreCase));
-        return companies.ToList();
+        return _items.Where(i => i.Name.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
     }
 
     public void DeleteCompany(Guid companyId)
@@ -36,10 +34,18 @@ public class CompanyService : GenericService<Company>
     public void UpdateCompany(Company updatedCompany)
     {
         var company = _items.FirstOrDefault(c => c.Id == updatedCompany.Id);
-        if (company != null)
+        if (company == null)
         {
-            company.Name = updatedCompany.Name;
-            SaveChanges();
+            return;
         }
+
+        company.Name = updatedCompany.Name;
+        company.Address = updatedCompany.Address;
+        company.City = updatedCompany.City;
+        company.Country = updatedCompany.Country;
+        company.Phone = updatedCompany.Phone;
+        company.Deparments = updatedCompany.Deparments;
+
+        SaveChanges();
     }
 }

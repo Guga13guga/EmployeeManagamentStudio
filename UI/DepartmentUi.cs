@@ -125,14 +125,9 @@ public class DepartmentUi
         Console.WriteLine($"Current Name: {department.Name}");
         Console.WriteLine("enter new department name (leave blank to keep current):");
         var newName = Console.ReadLine();
-        if(!string.IsNullOrEmpty(newName))
+        if (!string.IsNullOrWhiteSpace(newName))
         {
             department.Name = newName;
-        }
-        else
-        {
-            Console.WriteLine("Department name cannot be empty.");
-            return;
         }
 
         Console.WriteLine("also update the department's company (y/n)?");
@@ -141,7 +136,7 @@ public class DepartmentUi
         {
             Console.WriteLine("enter new company name:");
             var newCompany = Console.ReadLine();
-            if (!string.IsNullOrEmpty(newCompany))
+            if (!string.IsNullOrWhiteSpace(newCompany))
             {
                 var companyObj = _companyService.GetAll().FirstOrDefault(c => c.Name.Equals(newCompany, StringComparison.OrdinalIgnoreCase));
                 if (companyObj is null)
@@ -149,9 +144,13 @@ public class DepartmentUi
                     Console.WriteLine("Company not found. Please add the company first.");
                     return;
                 }
+
                 department.CompanyId = companyObj.Id;
             }
         }
+
+        _departmentService.UpdateDepartment(department);
+        Console.WriteLine("Department updated successfully.");
     }
 
     private void ListDepartments()
